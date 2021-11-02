@@ -60,11 +60,11 @@ export class CdkBundlingLambdaStack extends cdk.Stack {
     });
     
     const javaLambdaFunction = new lambda.Function(this, 'java-lambda', {
-      runtime: lambda.Runtime.JAVA_11,
+      runtime: lambda.Runtime.JAVA_8,
       handler: 'com.example.App',
       code: lambda.Code.fromAsset('./lambda/java', {
         bundling: {
-          image: lambda.Runtime.JAVA_11.bundlingImage,
+          image: lambda.Runtime.JAVA_8.bundlingImage,
           command: [],
           local: {
             tryBundle(outputDir: string) {
@@ -112,10 +112,10 @@ export class CdkBundlingLambdaStack extends cdk.Stack {
     });
     
     const javaLambdaLayer = new lambda.LayerVersion(this, 'java-lambda-layer', {
-      compatibleRuntimes: [lambda.Runtime.JAVA_11],
+      compatibleRuntimes: [lambda.Runtime.JAVA_8],
       code: lambda.Code.fromAsset('./lambda/java-layer', {
         bundling: {
-          image: lambda.Runtime.JAVA_11.bundlingImage,
+          image: lambda.Runtime.JAVA_8.bundlingImage,
           local: {
             tryBundle(outputDir: string) {
               try {
@@ -133,12 +133,12 @@ export class CdkBundlingLambdaStack extends cdk.Stack {
     });
   
     const javaWithLayerLambdaFunction = new lambda.Function(this, 'java-lambda-with-layer', {
-      runtime: lambda.Runtime.JAVA_11,
+      runtime: lambda.Runtime.JAVA_8,
       handler: 'com.example.App',
       layers: [javaLambdaLayer],
       code: lambda.Code.fromAsset('./lambda/java-with-layer', {
         bundling: {
-          image: lambda.Runtime.JAVA_11.bundlingImage,
+          image: lambda.Runtime.JAVA_8.bundlingImage,
           command: [],
           local: {
             tryBundle(outputDir: string) {
